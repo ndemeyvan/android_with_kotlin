@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">learn_recycler_view</string>
+    <string name="app_name">Android with kotlin</string>
     <string-array name="programming_language">
         <item>Java</item>
         <item>Kotlin</item>
@@ -9,6 +9,25 @@
         <item>C++</item>
         <item>Go</item>
         <item>Php</item>
+        <item>Python</item>
+        <item>Python</item>
+        <item>Python</item>
+        <item>Python</item>
+        <item>Python</item>
+        <item>Python</item>
+        <item>Python</item>
+        <item>Python</item>
+        <item>Python</item>
+        <item>Python</item>
+        <item>Python</item>
+        <item>Python</item>
+        <item>Python</item>
+        <item>Python</item>
+        <item>Python</item>
+        <item>Python</item>
+        <item>Python</item>
+        <item>Python</item>
+        <item>Python</item>
         <item>Python</item>
     </string-array>
 
