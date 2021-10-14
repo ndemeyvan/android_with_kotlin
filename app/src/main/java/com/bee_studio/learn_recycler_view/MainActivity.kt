@@ -2,31 +2,31 @@ package com.bee_studio.learn_recycler_view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.bee_studio.learn_recycler_view.BasicRecyclerView.RecyclerViewAdapter
+import android.widget.Button
+import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
+import com.bee_studio.learn_recycler_view.BasicViewModel.BasicViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    //Global Variable
-    private lateinit var linearLayoutManager: LinearLayoutManager
-    var programmingLanguage = listOf<String>()
-    var programminDescription = listOf<String>()
-    lateinit var adapter : RecyclerViewAdapter
-    lateinit var recyclerView: RecyclerView;
+   private lateinit var button : Button;
+   private lateinit var countText : TextView;
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //Init RecyckerView And Linear layout
-        linearLayoutManager = LinearLayoutManager(applicationContext)
-        recyclerView = findViewById(R.id.recyclerview)
-        //init List
-        programmingLanguage = resources.getStringArray(R.array.programming_language).toList()
-        programminDescription = resources.getStringArray(R.array.programming_description).toList()
-       //Pass the List to the Adapter
-        adapter = RecyclerViewAdapter(programmingLanguage);
-        recyclerView.layoutManager = linearLayoutManager
-        recyclerView.adapter = adapter
+        button = findViewById(R.id.button)
+        countText = findViewById(R.id.textView)
+        var viewModel = ViewModelProvider(this).get(BasicViewModel::class.java)
+        countText.text=viewModel.num.toString()
+
+        button.setOnClickListener {
+            viewModel.addNumber()
+            countText.text=viewModel.num.toString()
+        }
+
     }
+
+
 }
