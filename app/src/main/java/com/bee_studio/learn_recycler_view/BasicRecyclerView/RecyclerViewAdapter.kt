@@ -1,10 +1,11 @@
-package com.bee_studio.learn_recycler_view
+package com.bee_studio.learn_recycler_view.BasicRecyclerView
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bee_studio.learn_recycler_view.R
 
 class RecyclerViewAdapter(
     private var language: List<String>,
