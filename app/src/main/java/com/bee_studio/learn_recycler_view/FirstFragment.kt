@@ -5,18 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.Navigation
-import com.bee_studio.learn_recycler_view.R
+import androidx.lifecycle.ViewModelProvider
+import com.bee_studio.learn_recycler_view.DataBase.ShoppingDatabase
+import com.bee_studio.learn_recycler_view.Repository.ShoppingRepository
 import com.bee_studio.learn_recycler_view.ShareViewModel.ShareViewModel
+import com.bee_studio.learn_recycler_view.ShareViewModel.ViewModelFactory
 
 
 class FirstFragment : Fragment() {
-
-    private val shareViewModel:ShareViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -24,8 +21,13 @@ class FirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var view= inflater.inflate(R.layout.fragment_first, container, false)
-
+        var view = inflater.inflate(R.layout.fragment_first, container, false)
+        val database = ShoppingDatabase(requireActivity().application)
+        val repository = ShoppingRepository(database)
+        val factory = ViewModelFactory(repository)
+        //Quand on utilise la delegation ,
+        // pour passer une valeur au factory , on l efait comme ici bas
+        val shareViewModel: ShareViewModel by activityViewModels() { factory }
 
         return view
     }

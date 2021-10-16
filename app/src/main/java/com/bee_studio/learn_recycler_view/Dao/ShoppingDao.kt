@@ -21,6 +21,6 @@ interface ShoppingDao {
     suspend fun updateShoppingItem(item:ShoppingItem)
     //Query Permet d'ecrire soit meme ses propre requete SQL
     @Query("SELECT * FROM Shopping_items")
-    suspend fun getAllShoppingItems(item:ShoppingItem):LiveData<List<ShoppingItem>>
+    suspend fun getAllShoppingItems():LiveData<List<ShoppingItem>>
 
 }

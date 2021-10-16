@@ -3,16 +3,32 @@ package com.bee_studio.learn_recycler_view.ShareViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.bee_studio.learn_recycler_view.Entities.ShoppingItem
+import com.bee_studio.learn_recycler_view.Repository.ShoppingRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class ShareViewModel:ViewModel() {
+class ShareViewModel(private val repository: ShoppingRepository) : ViewModel() {
 
-var _country=MutableLiveData<String>("Canada")
-val country:LiveData<String> = _country
 
-    fun saveCountry( newCountry:String){
-        _country.value=newCountry
+    fun insertShoppingItem(item: ShoppingItem) {
+        viewModelScope.launch {
+            repository.insertShopping(item)
+        }
     }
 
+    fun deleteShoppingItem(item: ShoppingItem) {
+        viewModelScope.launch {
+            repository.deleteShopping(item)
+        }
+    }
+
+    fun getAllShoppingItem(){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.getAllShoppingItem()
+        }
+    }
 
 
 }

@@ -7,12 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.NavArgs
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.navArgs
-import com.bee_studio.learn_recycler_view.R
 import com.bee_studio.learn_recycler_view.ShareViewModel.ShareViewModel
 
 
@@ -33,13 +29,7 @@ class SecondFragment : Fragment() {
         val vue = inflater.inflate(R.layout.fragment_second, container, false)
         secondButton = vue.findViewById(R.id.second_button)
         editText = vue.findViewById(R.id.secondEditText)
-        shareViewModel.country.observe(viewLifecycleOwner,{country->
-            editText.setText(country)
-        })
-        secondButton.setOnClickListener {
-            shareViewModel.saveCountry(editText.text.toString())
-            Navigation.findNavController(vue).navigate(R.id.action_secondFragment_to_firstFragment)
-        }
+
         return vue
     }
 
