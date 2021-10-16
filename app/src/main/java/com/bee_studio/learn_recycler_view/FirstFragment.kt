@@ -6,13 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.bee_studio.learn_recycler_view.R
+import com.bee_studio.learn_recycler_view.ShareViewModel.ShareViewModel
 
 
 class FirstFragment : Fragment() {
 
     lateinit  var  firstButton : Button;
+    lateinit  var  editText : EditText;
+    private val shareViewModel:ShareViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -22,10 +28,13 @@ class FirstFragment : Fragment() {
         // Inflate the layout for this fragment
         var view= inflater.inflate(R.layout.fragment_first, container, false)
         firstButton = view.findViewById(R.id.first_button)
+        editText = view.findViewById(R.id.firstEditText)
+        shareViewModel.country.observe(viewLifecycleOwner,{country->
+            editText.setText(country)
+        })
         firstButton.setOnClickListener {
-            //Pour passer les donne d'un ecran a un autre
+            shareViewModel.saveCountry(editText.text.toString())
             val action = FirstFragmentDirections.actionFirstFragmentToSecondFragment(22)
-            //Note que si aucune valeur n'avais ete passe sur le nav , il aurait utiliser la valeur par default passe dans le navGraph
             Navigation.findNavController(view).navigate(action)
         }
         return view
