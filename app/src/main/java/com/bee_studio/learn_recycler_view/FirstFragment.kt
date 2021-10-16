@@ -23,7 +23,10 @@ class FirstFragment : Fragment() {
         var view= inflater.inflate(R.layout.fragment_first, container, false)
         firstButton = view.findViewById(R.id.first_button)
         firstButton.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_firstFragment_to_secondFragment)
+            //Pour passer les donne d'un ecran a un autre
+            val action = FirstFragmentDirections.actionFirstFragmentToSecondFragment(22)
+            //Note que si aucune valeur n'avais ete passe sur le nav , il aurait utiliser la valeur par default passe dans le navGraph
+            Navigation.findNavController(view).navigate(action)
         }
         return view
     }
