@@ -12,23 +12,15 @@ import kotlinx.coroutines.launch
 class ShareViewModel(private val repository: ShoppingRepository) : ViewModel() {
 
 
-    fun insertShoppingItem(item: ShoppingItem) {
-        viewModelScope.launch {
-            repository.insertShopping(item)
-        }
+    fun insertShoppingItem(item: ShoppingItem) = viewModelScope.launch {
+        repository.insertShopping(item)
     }
 
-    fun deleteShoppingItem(item: ShoppingItem) {
-        viewModelScope.launch {
-            repository.deleteShopping(item)
-        }
+    fun deleteShoppingItem(item: ShoppingItem) = viewModelScope.launch {
+        repository.deleteShopping(item)
     }
 
-    fun getAllShoppingItem(){
-        viewModelScope.launch(Dispatchers.IO){
-            repository.getAllShoppingItem()
-        }
-    }
+    fun getAllShoppingItem() =  repository.getAllShoppingItem()
 
 
 }
