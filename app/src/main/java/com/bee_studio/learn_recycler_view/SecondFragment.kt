@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import com.bee_studio.learn_recycler_view.Entities.ShoppingItem
 import com.bee_studio.learn_recycler_view.ShareViewModel.ShareViewModel
 
@@ -42,8 +43,13 @@ class SecondFragment : Fragment() {
             }else{
                 val item = ShoppingItem(name,amount.toInt())
                 shareViewModel.insertShoppingItem(item)
+                ed_item_amount.setText("")
+                ed_item_name.setText("")
+                Navigation.findNavController(vue).navigate(R.id.action_secondFragment_to_firstFragment)
+
             }
             close_dialog.setOnClickListener {
+                Navigation.findNavController(vue).navigate(R.id.action_secondFragment_to_firstFragment)
             }
 
         }
