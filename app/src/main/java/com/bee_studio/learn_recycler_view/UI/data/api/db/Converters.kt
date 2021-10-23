@@ -1,0 +1,18 @@
+package com.bee_studio.learn_recycler_view.UI.data.api.db
+
+import androidx.room.TypeConverter
+import com.bee_studio.learn_recycler_view.UI.models.Source
+
+class Converters {
+
+    @TypeConverter
+    fun fromSource(source: Source):String{
+        return source.name
+    }
+
+    @TypeConverter
+    fun toSource(name:String):Source{
+        return Source(name,name)
+    }
+
+}
