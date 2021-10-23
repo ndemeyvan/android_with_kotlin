@@ -3,34 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_navigation_graph"
-    app:startDestination="@id/firstFragment">
-
+    app:startDestination="@id/breaking_news">
     <fragment
-        android:id="@+id/firstFragment"
-        android:name="com.bee_studio.learn_recycler_view.FirstFragment"
-        android:label="fragment_first"
-        tools:layout="@layout/fragment_first" >
+        android:id="@+id/breaking_news"
+        android:name="com.bee_studio.learn_recycler_view.UI.fragments.Breaking_news"
+        android:label="fragment_breakin_news"
+        tools:layout="@layout/fragment_breakin_news" >
         <action
-            android:id="@+id/action_firstFragment_to_secondFragment"
-            app:destination="@id/secondFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right" />
+            android:id="@+id/action_breaking_news_to_article_fragment"
+            app:destination="@id/article_fragment"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
-        android:id="@+id/secondFragment"
-        android:name="com.bee_studio.learn_recycler_view.SecondFragment"
-        android:label="fragment_second"
-        tools:layout="@layout/fragment_second" >
+        android:id="@+id/save_fragment"
+        android:name="com.bee_studio.learn_recycler_view.UI.fragments.Save_fragment"
+        android:label="fragment_save_fragment"
+        tools:layout="@layout/fragment_save_fragment" >
         <action
-            android:id="@+id/action_secondFragment_to_firstFragment"
-            app:destination="@id/firstFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popUpTo="@id/secondFragment"
-            app:popUpToInclusive="true" />
-        <argument
-            android:name="number"
-            app:argType="integer"
-            android:defaultValue="2" />
+            android:id="@+id/action_save_fragment_to_article_fragment"
+            app:destination="@id/article_fragment"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
     </fragment>
+    <fragment
+        android:id="@+id/search_fragment"
+        android:name="com.bee_studio.learn_recycler_view.UI.fragments.Search_fragment"
+        android:label="fragment_search_fragment"
+        tools:layout="@layout/fragment_search_fragment" >
+        <action
+            android:id="@+id/action_search_fragment_to_article_fragment"
+            app:destination="@id/article_fragment"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/article_fragment"
+        android:name="com.bee_studio.learn_recycler_view.UI.fragments.Article_fragment"
+        android:label="fragment_article_fragment"
+        tools:layout="@layout/fragment_article_fragment" />
 </navigation>
