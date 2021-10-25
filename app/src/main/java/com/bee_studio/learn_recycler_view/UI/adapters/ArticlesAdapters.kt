@@ -12,7 +12,7 @@ import com.bee_studio.learn_recycler_view.R
 import com.bee_studio.learn_recycler_view.UI.models.Article
 import com.bumptech.glide.Glide
 
-class ArticlesAsapters() : RecyclerView.Adapter<ArticlesAsapters.ArticleViewHolder>() {
+class ArticlesAdapters() : RecyclerView.Adapter<ArticlesAdapters.ArticleViewHolder>() {
 
 
     ///////Diff Utils Implementation
@@ -52,13 +52,13 @@ class ArticlesAsapters() : RecyclerView.Adapter<ArticlesAsapters.ArticleViewHold
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ArticlesAsapters.ArticleViewHolder {
+    ): ArticlesAdapters.ArticleViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_article_preview, parent, false)
         return ArticleViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ArticlesAsapters.ArticleViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ArticlesAdapters.ArticleViewHolder, position: Int) {
         var currenItem = differ.currentList[position]
         Glide.with(holder.itemView.context).load(currenItem.urlToImage).into(holder.ivArticleImage)
         holder.apply {

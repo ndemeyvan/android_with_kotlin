@@ -15,22 +15,25 @@ import com.bee_studio.learn_recycler_view.UI.models.Article
 @TypeConverters(Converters::class)
 abstract class ArticleDataBase : RoomDatabase() {
 
-    abstract fun getArticleDao(): ArticleDAO
-    private val LOCK = Any()
-    @Volatile
-    private var instance: ArticleDataBase? = null
+    abstract fun getArticleDao(): DAO
 
-    operator fun invoke(context: Context) = instance
-        ?: synchronized(LOCK) {
-            instance
-                ?: createDatabase(
-                    context
-                ).also { instance = it }
-        }
+    companion object {
+        private val LOCK = Any()
+        @Volatile
+        private var instance: ArticleDataBase? = null
 
-    private fun createDatabase(context: Context) =
-        Room.databaseBuilder(
-            context.applicationContext,
-            ArticleDataBase::class.java, "article.db"
-        ).build()
+        operator fun invoke(context: Context) = instance
+            ?: synchronized(LOCK) {
+                instance
+                    ?: createDatabase(
+                        context
+                    ).also { instance = it }
+            }
+
+        private fun createDatabase(context: Context) =
+            Room.databaseBuilder(
+                context.applicationContext,
+                ArticleDataBase::class.java, "article.db"
+            ).build()
+    }
 }
