@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -15,37 +16,23 @@ import com.bumptech.glide.Glide
 class ArticlesAdapters() : RecyclerView.Adapter<ArticlesAdapters.ArticleViewHolder>() {
 
 
-    ///////Diff Utils Implementation
-    private val diffCallBack = object : DiffUtil.ItemCallback<Article>() {
-        override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
-            //Ici il faut compatrer deux element dans l'object qui sont unique
-            return oldItem.url == newItem.url
-        }
+     var oldArticleList = emptyList<Article>()
 
-        override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
-            return oldItem == newItem
-        }
-
+    fun setData(newArticleList:List<Article>){
+        val diffUtil = MyDiffUtils(oldArticleList,newArticleList)
+        val diffResult = DiffUtil.calculateDiff(diffUtil)
+        oldArticleList = newArticleList
+        print("#################### T OLD ARTICLE : ${oldArticleList.size} \n")
+        print("#################### T NEW ARTICLE : ${newArticleList.size}")
+        diffResult.dispatchUpdatesTo(this)
     }
 
-    //Ceci est charger de comparer nos deux listes
-    val differ = AsyncListDiffer(this, diffCallBack)
-
-
     inner class ArticleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvTitle: TextView
-        val tvDescription: TextView
-        val tvSource: TextView
-        val tvPublishedAt: TextView
-        val ivArticleImage: ImageView
-
-        init {
-            tvTitle = itemView.findViewById(R.id.tvTitle)
-            tvDescription = itemView.findViewById(R.id.tvDescription)
-            tvSource = itemView.findViewById(R.id.tvSource)
-            tvPublishedAt = itemView.findViewById(R.id.tvPublishedAt)
-            ivArticleImage = itemView.findViewById(R.id.ivArticleImage)
-        }
+        val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
+        val articleItem : ConstraintLayout = itemView.findViewById(R.id.article_item)
+        val tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
+        val tvSource: TextView = itemView.findViewById(R.id.tvSource)
+        val ivArticleImage: ImageView = itemView.findViewById(R.id.ivArticleImage)
 
     }
 
@@ -59,14 +46,13 @@ class ArticlesAdapters() : RecyclerView.Adapter<ArticlesAdapters.ArticleViewHold
     }
 
     override fun onBindViewHolder(holder: ArticlesAdapters.ArticleViewHolder, position: Int) {
-        var currenItem = differ.currentList[position]
+        var currenItem = oldArticleList[position]
         Glide.with(holder.itemView.context).load(currenItem.urlToImage).into(holder.ivArticleImage)
         holder.apply {
             tvTitle.text = currenItem.title
             tvDescription.text = currenItem.description
             tvSource.text = currenItem.source.name
-            tvPublishedAt.text = currenItem.publishedAt
-            setOnItemClickListener {
+            articleItem.setOnClickListener  {
                 onItemClickListener?.let {
                     it(currenItem)
                 }
@@ -80,7 +66,7 @@ class ArticlesAdapters() : RecyclerView.Adapter<ArticlesAdapters.ArticleViewHold
         onItemClickListener=listener
     }
 
-    override fun getItemCount() = differ.currentList.size
+    override fun getItemCount() = oldArticleList.size
 
 
 }

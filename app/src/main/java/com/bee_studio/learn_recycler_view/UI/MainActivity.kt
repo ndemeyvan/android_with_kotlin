@@ -26,10 +26,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         //REPO,VM,Factory creations
         val repo = NewsRepository(ArticleDataBase(this))
-        val factory = NewsVMFactory(repo)
+        val factory = NewsVMFactory(repo,application)
         viewModel =ViewModelProvider(this,factory).get(NewsViewModel::class.java)
         //
-        bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bottomNavigationView = findViewById(R.id.bottomNavigationView)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView2) as NavHostFragment?
         if (navHostFragment != null) {

@@ -41,5 +41,13 @@
         android:id="@+id/article_fragment"
         android:name="com.bee_studio.learn_recycler_view.UI.fragments.Article_fragment"
         android:label="fragment_article_fragment"
-        tools:layout="@layout/fragment_article_fragment" />
+        tools:layout="@layout/fragment_article_fragment" >
+        <argument
+            android:name="url"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="article"
+            app:argType="com.bee_studio.learn_recycler_view.UI.models.Article" />
+    </fragment>
 </navigation>
